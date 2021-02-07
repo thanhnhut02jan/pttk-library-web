@@ -9,22 +9,24 @@ import {
 
 import TopNav from './components/TopNav';
 import Home from './pages/home';
-import Product from './pages/products'
+import QuanLySach from './pages/QuanLySach'
 
 function App() {
   return (
     <Router>
+
       <TopNav />
+
       <Switch>
         <Route exact path='/'>
           <Home />
         </Route>
 
-        <Route exact path='/products/'>
-          <Product />
+        <Route exact path='/books-management/'>
+          <QuanLySach />
         </Route>
-
       </Switch>
+
     </Router>
 
   );

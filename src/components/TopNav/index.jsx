@@ -25,7 +25,7 @@ const TopNav = (props) => {
     return (
         <div>
             <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">reactstrap</NavbarBrand>
+                <NavbarBrand >Library</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
@@ -36,7 +36,7 @@ const TopNav = (props) => {
                         </NavItem>
                         <NavItem>
                             <NavLink>
-                                <Link to='/products/'>Product</Link>
+                                <Link to='/books-management/'>Quản lý sách</Link>
                             </NavLink>
                         </NavItem>
                     </Nav>
