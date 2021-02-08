@@ -1,39 +1,113 @@
 import React from 'react';
-import { Table } from 'reactstrap';
+import { Table } from 'react-bootstrap';
 
-const Example = (props) => {
-    return (
-        <Table striped>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Tên sách</th>
-                    <th>Tác giả</th>
-                    <th>Số lượng</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Tôi tự học</td>
-                    <td>Nguyễn Duy Cần</td>
-                    <td>2</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Óc sáng suốt</td>
-                    <td>Nguyễn Duy Cần</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Trí tuệ giả tạo</td>
-                    <td>Nicholas Carr</td>
-                    <td>5</td>
-                </tr>
-            </tbody>
-        </Table>
-    );
+import TableRow from './TableRow'
+
+const BookTable = (props) => {
+  let data = {
+    book: [
+      {
+        id: 1,
+        name: 'Tôi tự học',
+        author: 'Nguyễn Duy Cần',
+        amount: 5
+      },
+      {
+        id: 2,
+        name: 'Óc sáng suốt',
+        author: 'Nguyễn Duy Cần',
+        amount: 4
+      },
+      {
+        id: 1,
+        name: 'Tôi tự học',
+        author: 'Nguyễn Duy Cần',
+        amount: 5
+      },
+      {
+        id: 2,
+        name: 'Óc sáng suốt',
+        author: 'Nguyễn Duy Cần',
+        amount: 4
+      },
+      {
+        id: 1,
+        name: 'Tôi tự học',
+        author: 'Nguyễn Duy Cần',
+        amount: 5
+      },
+      {
+        id: 2,
+        name: 'Óc sáng suốt',
+        author: 'Nguyễn Duy Cần',
+        amount: 4
+      },
+      {
+        id: 1,
+        name: 'Tôi tự học',
+        author: 'Nguyễn Duy Cần',
+        amount: 5
+      },
+      {
+        id: 2,
+        name: 'Óc sáng suốt',
+        author: 'Nguyễn Duy Cần',
+        amount: 4
+      },
+      {
+        id: 1,
+        name: 'Tôi tự học',
+        author: 'Nguyễn Duy Cần',
+        amount: 5
+      },
+      {
+        id: 2,
+        name: 'Óc sáng suốt',
+        author: 'Nguyễn Duy Cần',
+        amount: 4
+      },
+      {
+        id: 1,
+        name: 'Tôi tự học',
+        author: 'Nguyễn Duy Cần',
+        amount: 5
+      },
+      {
+        id: 2,
+        name: 'Óc sáng suốt',
+        author: 'Nguyễn Duy Cần',
+        amount: 4
+      },
+      {
+        id: 1,
+        name: 'Tôi tự học',
+        author: 'Nguyễn Duy Cần',
+        amount: 5
+      },
+      {
+        id: 2,
+        name: 'Óc sáng suốt',
+        author: 'Nguyễn Duy Cần',
+        amount: 4
+      }
+    ]
+  }
+
+  return (
+    <Table hover striped>
+      <thead >
+        <tr>
+          <th>#</th>
+          <th>Tên sách</th>
+          <th>Tác giả</th>
+          <th>Số lượng</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.book.map((item, i) => (<TableRow {...item} key={i} id={i + 1}></TableRow>))}
+      </tbody>
+    </Table>
+  );
 }
 
-export default Example;
+export default BookTable;

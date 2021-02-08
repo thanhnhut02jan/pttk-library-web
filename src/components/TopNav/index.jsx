@@ -1,49 +1,29 @@
 import React, { useState } from 'react';
 
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
+  Link
 } from "react-router-dom";
 
 import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink
-} from 'reactstrap';
+  Navbar,
+  Nav
+} from 'react-bootstrap';
 
 const TopNav = (props) => {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-    const toggle = () => setIsOpen(!isOpen);
-
-    return (
-        <div>
-            <Navbar color="light" light expand="md">
-                <NavbarBrand >Library</NavbarBrand>
-                <NavbarToggler onClick={toggle} />
-                <Collapse isOpen={isOpen} navbar>
-                    <Nav className="mr-auto" navbar>
-                        <NavItem>
-                            <NavLink>
-                                <Link to='/'>Home</Link>
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink>
-                                <Link to='/books-management/'>Quản lý sách</Link>
-                            </NavLink>
-                        </NavItem>
-                    </Nav>
-                </Collapse>
-            </Navbar>
-        </div>
-    );
+  return (
+    <Navbar bg="light" expand="lg">
+      <Navbar.Brand>React-Bootstrap</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link as={Link} to='/'>Home</Nav.Link>
+          <Nav.Link as={Link} to='/books-management/'>Quản lý sách</Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  );
 }
 
 export default TopNav;
