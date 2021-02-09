@@ -1,96 +1,23 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 
-import TableRow from './TableRow'
+import { useState } from 'react';
+
+import TableRow from './TableRow';
+import EditBookInfoForm from './EditBookInfoForm';
+import BooksData from './Data';
 
 const BookTable = (props) => {
   let data = {
-    book: [
-      {
-        id: 1,
-        name: 'Tôi tự học',
-        author: 'Nguyễn Duy Cần',
-        amount: 5
-      },
-      {
-        id: 2,
-        name: 'Óc sáng suốt',
-        author: 'Nguyễn Duy Cần',
-        amount: 4
-      },
-      {
-        id: 1,
-        name: 'Tôi tự học',
-        author: 'Nguyễn Duy Cần',
-        amount: 5
-      },
-      {
-        id: 2,
-        name: 'Óc sáng suốt',
-        author: 'Nguyễn Duy Cần',
-        amount: 4
-      },
-      {
-        id: 1,
-        name: 'Tôi tự học',
-        author: 'Nguyễn Duy Cần',
-        amount: 5
-      },
-      {
-        id: 2,
-        name: 'Óc sáng suốt',
-        author: 'Nguyễn Duy Cần',
-        amount: 4
-      },
-      {
-        id: 1,
-        name: 'Tôi tự học',
-        author: 'Nguyễn Duy Cần',
-        amount: 5
-      },
-      {
-        id: 2,
-        name: 'Óc sáng suốt',
-        author: 'Nguyễn Duy Cần',
-        amount: 4
-      },
-      {
-        id: 1,
-        name: 'Tôi tự học',
-        author: 'Nguyễn Duy Cần',
-        amount: 5
-      },
-      {
-        id: 2,
-        name: 'Óc sáng suốt',
-        author: 'Nguyễn Duy Cần',
-        amount: 4
-      },
-      {
-        id: 1,
-        name: 'Tôi tự học',
-        author: 'Nguyễn Duy Cần',
-        amount: 5
-      },
-      {
-        id: 2,
-        name: 'Óc sáng suốt',
-        author: 'Nguyễn Duy Cần',
-        amount: 4
-      },
-      {
-        id: 1,
-        name: 'Tôi tự học',
-        author: 'Nguyễn Duy Cần',
-        amount: 5
-      },
-      {
-        id: 2,
-        name: 'Óc sáng suốt',
-        author: 'Nguyễn Duy Cần',
-        amount: 4
-      }
-    ]
+    book: BooksData
+  }
+
+  const [currentItemShow, setCurrentItemShow] = useState({});
+  const [isShowForm, setShowForm] = useState(false);
+
+  const showForm = (id) => {
+    setCurrentItemShow(data.book[id - 1]);
+    setShowForm(true);
   }
 
   return (
@@ -104,9 +31,11 @@ const BookTable = (props) => {
         </tr>
       </thead>
       <tbody>
-        {data.book.map((item, i) => (<TableRow {...item} key={i} id={i + 1}></TableRow>))}
+        {data.book.map((item) => (<TableRow showForm={showForm} {...item} key={item.id}></TableRow>))}
       </tbody>
+      <EditBookInfoForm show={isShowForm} setShowForm={setShowForm} {...currentItemShow}></EditBookInfoForm>
     </Table>
+
   );
 }
 

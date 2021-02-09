@@ -14,11 +14,11 @@ const TopNav = (props) => {
 
   return (
     <Navbar bg="light" expand="lg">
-      <Navbar.Brand>React-Bootstrap</Navbar.Brand>
+      <Navbar.Brand className=''>Thư viện</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link as={Link} to='/'>Home</Nav.Link>
+          <Nav.Link as={Link} to='/'>Trang chủ</Nav.Link>
           <Nav.Link as={Link} to='/books-management/'>Quản lý sách</Nav.Link>
         </Nav>
       </Navbar.Collapse>

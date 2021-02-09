@@ -1,7 +1,7 @@
 const TableRow = (props) => {
-  let { id, name, author, amount } = props;
+  let { id, name, author, amount, showForm } = props;
   return (
-    <tr>
+    <tr onClick={() => showForm(id)}>
       <th scope="row">{id}</th>
       <td>{name}</td>
       <td>{author}</td>
