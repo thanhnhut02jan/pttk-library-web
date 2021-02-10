@@ -1,11 +1,20 @@
 import { Form, Modal, Button } from 'react-bootstrap'
 
-import { useState } from 'react';
+const EditBookInfoForm = (props) => {
+  const {
+    id,
+    name,
+    author,
+    amount,
+    showFormState,
+    setShowForm } = props;
 
-const EditBookInfoForm = ({ id, name, author, amount, show, setShowForm }) => {
+  // const handleChange = (e) => {
+  //   e.target.value
+  // }
 
   return (
-    <Modal show={show} onHide={() => setShowForm(false)}>
+    <Modal show={showFormState} onHide={() => setShowForm(false)}>
       <Modal.Header closeButton>
         <Modal.Title>Chỉnh sửa thông tin sách</Modal.Title>
       </Modal.Header>
@@ -36,8 +45,8 @@ const EditBookInfoForm = ({ id, name, author, amount, show, setShowForm }) => {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="secondary">Close</Button>
-        <Button variant="primary" >Save changes</Button>
+        <Button variant="secondary" onClick={() => setShowForm(false)}>Close</Button>
+        <Button variant="primary" onClick={() => setShowForm(false)}>Save changes</Button>
       </Modal.Footer>
     </Modal>
 

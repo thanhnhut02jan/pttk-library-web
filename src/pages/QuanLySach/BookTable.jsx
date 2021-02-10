@@ -1,6 +1,5 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
-
 import { useState } from 'react';
 
 import TableRow from './TableRow';
@@ -13,15 +12,16 @@ const BookTable = (props) => {
   }
 
   const [currentItemShow, setCurrentItemShow] = useState({});
-  const [isShowForm, setShowForm] = useState(false);
+  const [showFormState, setShowForm] = useState(false);
 
   const showForm = (id) => {
     setCurrentItemShow(data.book[id - 1]);
     setShowForm(true);
+    console.log('click');
   }
 
   return (
-    <Table hover striped>
+    <Table hover>
       <thead >
         <tr>
           <th>#</th>
@@ -31,9 +31,20 @@ const BookTable = (props) => {
         </tr>
       </thead>
       <tbody>
-        {data.book.map((item) => (<TableRow showForm={showForm} {...item} key={item.id}></TableRow>))}
+        {
+          data.book.map((item) =>
+            <TableRow
+              showForm={showForm}
+              {...item}
+              key={item.id}>
+            </TableRow>)
+        }
       </tbody>
-      <EditBookInfoForm show={isShowForm} setShowForm={setShowForm} {...currentItemShow}></EditBookInfoForm>
+      <EditBookInfoForm
+        showFormState={showFormState}
+        setShowForm={setShowForm}
+        {...currentItemShow}>
+      </EditBookInfoForm>
     </Table>
 
   );
