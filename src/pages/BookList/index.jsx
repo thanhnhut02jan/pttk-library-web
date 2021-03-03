@@ -22,9 +22,7 @@ export default function BookList() {
 
   return (
     <Container className={classes.mt}>
-      <GridList container className={classes.root}>
-        {BookInfos.map((info, i) => <Card key={i} imgsrc={info.imgsrc} title={info.title} author={info.author} />)}
-      </GridList>
+      {BookInfos.map((info, i) => <Card key={i} imgsrc={info.imgsrc} title={info.title} author={info.author} />)}
     </Container>
 
   )
