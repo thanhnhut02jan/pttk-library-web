@@ -4,42 +4,26 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
 import React from 'react'
 
-
-import Container from "@material-ui/core/Container";
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Button from '@material-ui/core/Button';
+import TopNav from './components/TopNav'
+import BookList from './pages/BookList'
 
 function App() {
   return (
     <Router>
-
+      <TopNav />
       <React.Fragment>
-        <CssBaseline />
-        <AppBar position="relative">
-          <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
-              Library
-          </Typography>
-          </Toolbar>
-        </AppBar>
 
-        <Container>
-          <Switch>
-            <Route exact path='/'>
+        <Switch>
+          <Route exact path='/'>
+            <BookList />
+          </Route>
 
-            </Route>
+          <Route exact path='/books-management/'>
 
-            <Route exact path='/books-management/'>
-
-            </Route>
-          </Switch>
-        </Container>
+          </Route>
+        </Switch>
       </React.Fragment>
     </Router>
 
