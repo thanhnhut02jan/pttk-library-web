@@ -1,6 +1,5 @@
-const firebase = require("firebase");
-// Required for side-effects
-require("firebase/firestore");
+import firebase from 'firebase/app';
+import 'firebase/firebase-firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCAvHYkNsU3If0iuIvxqi6oVzir0ypjBTs",
@@ -12,12 +11,10 @@ const firebaseConfig = {
   measurementId: "G-SXRT84RZ6K"
 };
 
-firebase.initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-var db = firebase.firestore();
+const db = firebaseApp.firestore();
 
-db.collection("bookInfos").get().then((querySnapshot) => {
-  querySnapshot.forEach((doc) => {
-    console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
-  });
-});
+export default db;
+
+
