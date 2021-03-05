@@ -27,11 +27,16 @@ export default function BookList() {
   let [data, uptData] = useState([]);
 
   let fetchData = async () => {
-    const doc = await db.collection('bookInfos').doc(category).get();
-    if (!doc.exists) {
+    const snapshot = await db.collection('bookInfos').where('category', '==', category).get();
+    if (snapshot.empty) {
       console.log('No such document!');
     } else {
-      uptData(doc.data().list);
+      let t = []
+      snapshot.forEach(doc => {
+        t.push(doc.data());
+        console.log(doc)
+      })
+      uptData(t);
     }
   }
 
