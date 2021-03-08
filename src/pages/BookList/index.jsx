@@ -25,7 +25,7 @@ const useStyle = makeStyles(theme => ({
 export default function BookList() {
   const classes = useStyle();
 
-  let [category, setCategory] = useState('van-hoc');
+  let [category, setCategory] = useState('all');
   let [data, uptData] = useState([]);
 
   const cardsPerPage = 10;
@@ -35,16 +35,19 @@ export default function BookList() {
   const BookInfosCollection = db.collection('bookInfos')
 
   let fetchData = async () => {
-    const snapshot = await BookInfosCollection.where('category', '==', category).get();
+    var snapshot = category != 'all' ? BookInfosCollection.where('category', '==', category) : BookInfosCollection;
+    snapshot = await snapshot.get();
+
     setCurrentPage(0);
-    setTotalPages(Math.floor(snapshot.docs.length / cardsPerPage))
+    setTotalPages(Math.floor(snapshot.docs.length / cardsPerPage));
+
     if (snapshot.empty) {
       console.log('No such document!');
+      uptData([]);
     } else {
       let t = [];
       snapshot.forEach(doc => {
         t.push(doc.data());
-        console.log(doc)
       })
       uptData(t);
     }
@@ -72,20 +75,17 @@ export default function BookList() {
           value={category}
           onChange={handleChangeCategory}
         >
-          <MenuItem value={'van-hoc'}>
-            Văn học
-          </MenuItem>
-          <MenuItem value={'kinh-te-chinh-tri-phap-ly'}>
-            Kinh tế và Chính trị
-          </MenuItem>
+          <MenuItem value='all'>-- Category --</MenuItem>
+          <MenuItem value={'van-hoc'}>Văn học</MenuItem>
+          <MenuItem value={'kinh-te-chinh-tri-phap-ly'}>Kinh tế và Chính trị</MenuItem>
         </Select>
       </FormControl>
-      <Pagination
+      {data.length > 0 && <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         setCurrentPage={setCurrentPage}
         cardsPerPage={cardsPerPage}
-      />
+      />}
       <React.Fragment>
         {data.slice(currentPage * cardsPerPage, currentPage * cardsPerPage + cardsPerPage).map((info, i) =>
           <Card

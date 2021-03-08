@@ -2,6 +2,7 @@ import React from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
 import Icon from '@material-ui/core/Icon'
+import transitions from '@material-ui/core/styles/transitions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,11 +11,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '20px',
     padding: '16px 0',
     userSelect: 'none',
-    color: '#222'
+    color: '#222',
+
   },
   arrow_icon: {
     padding: '8px 12px',
     borderRadius: '4px',
+    transition: '0.1s',
     '&:hover': {
       color: '#fff',
       cursor: 'pointer',
