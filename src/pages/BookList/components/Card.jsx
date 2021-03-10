@@ -7,6 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
+import categoryMap from './categoryMap'
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 export default function ImgMediaCard(props) {
   const classes = useStyles();
 
-  const { imgsrc, title, author } = props;
+  const { imgsrc, title, author, category } = props;
 
   return (
     <Card className={classes.root} style={{ width: '100%' }}>
@@ -51,7 +53,7 @@ export default function ImgMediaCard(props) {
             {title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Tác giả: {author}
+            Tác giả: {author} . Thể loại: {categoryMap[category]}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -36,7 +36,7 @@ export default function BookList() {
 
   let fetchData = async () => {
     var snapshot = category != 'all' ? BookInfosCollection.where('category', '==', category) : BookInfosCollection;
-    snapshot = await snapshot.get();
+    snapshot = await snapshot.orderBy('title').get();
 
     setCurrentPage(0);
     setTotalPages(Math.floor(snapshot.docs.length / cardsPerPage));
@@ -75,9 +75,13 @@ export default function BookList() {
           value={category}
           onChange={handleChangeCategory}
         >
-          <MenuItem value='all'>-- Category --</MenuItem>
+          <MenuItem value='all'>-- All --</MenuItem>
           <MenuItem value={'van-hoc'}>Văn học</MenuItem>
           <MenuItem value={'kinh-te-chinh-tri-phap-ly'}>Kinh tế và Chính trị</MenuItem>
+          <MenuItem value={'tam-ly-ky-nang-song'}>Tâm lý và Kĩ năng sống</MenuItem>
+          <MenuItem value='giao-khoa-tham-khao'>Sách giáo khoa</MenuItem>
+
+          {/*  */}
         </Select>
       </FormControl>
       {data.length > 0 && <Pagination
@@ -93,9 +97,15 @@ export default function BookList() {
             imgsrc={info.imgSrc}
             title={info.title}
             author={info.author}
+            category={info.category}
           />)}
       </React.Fragment>
-
+      {data.length > 0 && <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        setCurrentPage={setCurrentPage}
+        cardsPerPage={cardsPerPage}
+      />}
     </Container>
 
   )

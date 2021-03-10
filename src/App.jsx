@@ -8,6 +8,7 @@ import React from 'react'
 
 import TopNav from './components/TopNav'
 import BookList from './pages/BookList'
+import NotFound from './pages/NotFound'
 
 function App() {
   return (
@@ -20,8 +21,8 @@ function App() {
             <BookList />
           </Route>
 
-          <Route exact path='/books-management/'>
-
+          <Route path='*'>
+            <NotFound />
           </Route>
         </Switch>
       </React.Fragment>
