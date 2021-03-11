@@ -59,7 +59,7 @@ export default function TopNav() {
             Library
           </Typography>
           <Button color="inherit" onClick={() => googleSignInPopup(googleProvider())}>Login</Button>
-          <Button color="inherit" onClick={() => console.log(firebase.auth().currentUser)}>Login</Button>
+          <Avatar style={firebase.auth().currentUser && { backgroundColor: 'white' }} src={firebase.auth().currentUser && firebase.auth().currentUser.photoURL} />
         </Toolbar>
       </AppBar>
     </div >
