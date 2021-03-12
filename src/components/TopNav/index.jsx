@@ -1,14 +1,11 @@
 import React from 'react';
 
-import firebase from "firebase/app";
-import "firebase/auth";
-
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
+
+import Login from './components/Login'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,35 +19,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function googleProvider() {
-  var provider = new firebase.auth.GoogleAuthProvider();
 
-  provider.setCustomParameters({
-    'login_hint': 'user@example.com'
-  });
-
-  return provider;
-}
-
-function googleSignInPopup(provider) {
-  firebase.auth()
-    .signInWithPopup(provider)
-    .then((result) => {
-      /** @type {firebase.auth.OAuthCredential} */
-      var credential = result.credential;
-      var token = credential.accessToken;
-      var user = result.user;
-    }).catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      var email = error.email;
-      var credential = error.credential;
-    });
-}
 
 export default function TopNav() {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -58,8 +30,7 @@ export default function TopNav() {
           <Typography variant="h6" className={classes.title}>
             Library
           </Typography>
-          <Button color="inherit" onClick={() => googleSignInPopup(googleProvider())}>Login</Button>
-          <Avatar style={firebase.auth().currentUser && { backgroundColor: 'white' }} src={firebase.auth().currentUser && firebase.auth().currentUser.photoURL} />
+          <Login />
         </Toolbar>
       </AppBar>
     </div >
