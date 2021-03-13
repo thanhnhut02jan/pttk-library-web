@@ -4,12 +4,15 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 import { makeStyles } from '@material-ui/core/styles';
-
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import Drawer from '@material-ui/core/Drawer';
-
 import Typography from '@material-ui/core/Typography'
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
 function googleProvider() {
   var provider = new firebase.auth.GoogleAuthProvider();
@@ -32,6 +35,8 @@ function googleSignInRedirect(provider) {
     });
 }
 
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -40,17 +45,20 @@ const useStyles = makeStyles((theme) => ({
   displayName: {
     lineHeight: 1.9,
     paddingRight: '16px'
+  },
+  list: {
+    width: '250px'
   }
 }));
 
 function Login() {
   const classes = useStyles();
 
-  let [currentUser, setCurrentUser] = useState(firebase.auth().currentUser);
+  let [currentUser, setCurrentUser] = useState();
   let [isDrawerOpen, setDrawerState] = useState(false);
 
-  let toggleDrawer = () => {
-    setDrawerState(!isDrawerOpen);
+  let toggleDrawer = (value) => {
+    if (currentUser) setDrawerState(value);
   }
 
   firebase.auth().onAuthStateChanged(user => {
@@ -58,9 +66,37 @@ function Login() {
       setCurrentUser(user);
     }
     else {
-      // User is signed out.
+
     }
   })
+
+  function logOut() {
+    firebase.auth()
+      .signOut()
+      .then(() => {
+        setCurrentUser(null)
+      });
+  }
+
+  const list = (
+    <div
+      className={classes.list}
+      onClick={() => toggleDrawer(false)}
+    >
+      <List>
+        <ListItem>
+          <Button style={{ width: '100%', }} onClick={() => logOut()}>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText>
+              Logout
+            </ListItemText>
+          </Button>
+        </ListItem>
+      </List>
+    </div>
+  )
 
   return (
     <div className={classes.root}>
@@ -81,14 +117,14 @@ function Login() {
       <Avatar
         style={{ backgroundColor: '#eee' }}
         src={currentUser && currentUser.photoURL}
-        onClick={() => toggleDrawer()}
+        onClick={() => toggleDrawer(true)}
       />
       <Drawer
         anchor={'right'}
         open={isDrawerOpen}
-        onClose={() => toggleDrawer()}
+        onClose={() => toggleDrawer(false)}
       >
-        <Button color={'inherit'}>Logout</Button>
+        {list}
       </Drawer>
     </div>
   )
